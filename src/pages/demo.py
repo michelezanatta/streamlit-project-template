@@ -189,11 +189,11 @@ else:
 
         columns = st.columns(4)
         columns[0].metric(label="Avg Tries Scored", value=f"{tries_scored_avg:.2f}", delta = f"{tries_scored_avg - tries_scored_avg_all:.2f}")
-        columns[1].metric(label="Avg Tries Conceded", value=f"{tries_conceded_avg:.2f}", delta=f"{tries_conceded_avg - tries_conceded_avg_all:.2f}")
-        columns[2].metric(label="Avg Penalty Off", value=f"{penalty_off_avg:.2f}", delta = f"{penalty_off_avg - penalty_off_avg_all:.2f}")
-        columns[3].metric(label="Avg Penalty Def", value=f"{penalty_def_avg:.2f}", delta = f"{penalty_def_avg - penalty_def_avg_all:.2f}")
+        columns[1].metric(label="Avg Tries Conceded", value=f"{tries_conceded_avg:.2f}", delta=f"{tries_conceded_avg - tries_conceded_avg_all:.2f}", delta_color="inverse")
+        columns[2].metric(label="Avg Penalty Off", value=f"{penalty_off_avg:.2f}", delta = f"{penalty_off_avg - penalty_off_avg_all:.2f}", delta_color="inverse")
+        columns[3].metric(label="Avg Penalty Def", value=f"{penalty_def_avg:.2f}", delta = f"{penalty_def_avg - penalty_def_avg_all:.2f}", delta_color="inverse")
         columns = st.columns(3)
         columns[0].metric(label="Avg Dominant Tackles per Game", value=f"{avg_dominant_tackles_per_game:.2f}", delta = f"{avg_dominant_tackles_per_game - avg_dominant_tackles_per_game_all:.2f}")
         columns[1].metric(label="Avg Not Dominant Tackles per Game", value=f"{avg_not_dominant_tackles_per_game:.2f}", delta = f"{avg_not_dominant_tackles_per_game - avg_not_dominant_tackles_per_game_all:.2f}")
-        columns[2].metric(label="Avg Missed Tackles per Game", value=f"{avg_missed_tackles_per_game:.2f}", delta = f"{avg_missed_tackles_per_game - avg_missed_tackles_per_game_all:.2f}")
+        columns[2].metric(label="Avg Missed Tackles per Game", value=f"{avg_missed_tackles_per_game:.2f}", delta = f"{avg_missed_tackles_per_game - avg_missed_tackles_per_game_all:.2f}", delta_color="inverse")
 
