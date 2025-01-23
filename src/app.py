@@ -76,6 +76,7 @@ pages = {
     'DataAnalysis' : [st.Page(f"{pages_dir}/plots.py", title="Plots", icon="📊"),
                     st.Page(f"{pages_dir}/dataframe.py", title="Data", icon="📈")],
     'Modeling' : [st.Page(f"{pages_dir}/model.py", title="Model", icon="🧠")],
+    'Demo' : [st.Page(f"{pages_dir}/demo.py", title="Demo", icon="🚀")],
 
 }
 
