@@ -1,0 +1,42 @@
+# Ignore Python virtual environment
+venv/
+.env/
+
+# Ignore Streamlit secrets
+secrets.toml
+
+# Ignore sensitive data
+auth.yaml
+config.yaml
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore IDE/project files
+.idea/
+.vscode/
+
+# # Ignore datasets
+# *.csv
+# *.xlsx
+# *.json
+# *.parquet
+
+# # Ignore outputs
+# *.png
+# *.jpg
+# *.gif
+# *.pdf
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
