@@ -66,19 +66,22 @@ pages_dir = config_params.pages_dir
 # if not check_password():
 #     st.stop()
 
-pages = {
-    'Home' : [st.Page(f"{pages_dir}/home.py", title="Home", icon="🏠",)],
-    'SimpleComponents' : [st.Page(f"{pages_dir}/text.py", title="Text", icon="📝"),
-                        st.Page(f"{pages_dir}/input_widgets.py", title="Input Widgets", icon="🔢"),
-                        st.Page(f"{pages_dir}/extras.py", title="Extras", icon="🎉")],
-    'Media' : [st.Page(f"{pages_dir}/media.py", title="Media", icon="📺")],
-    'Layouts' : [st.Page(f"{pages_dir}/layouts.py", title="Layouts", icon="📐")],
-    'DataAnalysis' : [st.Page(f"{pages_dir}/plots.py", title="Plots", icon="📊"),
-                    st.Page(f"{pages_dir}/dataframe.py", title="Data", icon="📈")],
-    'Modeling' : [st.Page(f"{pages_dir}/model.py", title="Model", icon="🧠")],
-    'Demo' : [st.Page(f"{pages_dir}/demo.py", title="Demo", icon="🚀")],
+# pages = {
+#     'Home' : [st.Page(f"{pages_dir}/home.py", title="Home", icon="🏠",)],
+#     'SimpleComponents' : [st.Page(f"{pages_dir}/text.py", title="Text", icon="📝"),
+#                         st.Page(f"{pages_dir}/input_widgets.py", title="Input Widgets", icon="🔢"),
+#                         st.Page(f"{pages_dir}/extras.py", title="Extras", icon="🎉")],
+#     'Media' : [st.Page(f"{pages_dir}/media.py", title="Media", icon="📺")],
+#     'Layouts' : [st.Page(f"{pages_dir}/layouts.py", title="Layouts", icon="📐")],
+#     'DataAnalysis' : [st.Page(f"{pages_dir}/plots.py", title="Plots", icon="📊"),
+#                     st.Page(f"{pages_dir}/dataframe.py", title="Data", icon="📈")],
+#     'Modeling' : [st.Page(f"{pages_dir}/model.py", title="Model", icon="🧠")],
+#     'Demo' : [st.Page(f"{pages_dir}/demo.py", title="Demo", icon="🚀")],
 
-}
+# }
+
+pages = {'Home' : [st.Page(f"{pages_dir}/home.py", title="Home", icon="🏠",)],
+         "Demo": [st.Page(f"{pages_dir}/demo.py", title="Demo", icon="🚀")],}
 
 pg = st.navigation(pages)
 pg.run()
