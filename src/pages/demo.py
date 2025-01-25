@@ -273,7 +273,7 @@ with tabs1:
 
     columns = st.columns(4)
     columns[0].metric(label="Mete CUS Torino", value=f"{tries_scored_selected_game:.2f}", delta = f"{tries_scored_selected_game - tries_scored_avg_all:.2f}")
-    columns[1].metric(label=f"Mete {selected_opponent}", value=f"{tries_conceded_selected_game:.2f}", delta=f"{tries_conceded_selected_game - tries_conceded_avg_all:.2f}", delta_color="inverse")
+    columns[1].metric(label=f"Mete Avversario", value=f"{tries_conceded_selected_game:.2f}", delta=f"{tries_conceded_selected_game - tries_conceded_avg_all:.2f}", delta_color="inverse")
     columns[2].metric(label="Falli Offensivi", value=f"{penalty_off_selected_game:.2f}", delta = f"{penalty_off_selected_game - penalty_off_avg_all:.2f}", delta_color="inverse")
     columns[3].metric(label="Falli Difensivi", value=f"{penalty_def_selected_game:.2f}", delta = f"{penalty_def_selected_game - penalty_def_avg_all:.2f}", delta_color="inverse")
 
@@ -359,98 +359,98 @@ with tabs2:
 
             st.dataframe(game_selected)
 
-st.header("Historical Analysis")
-st.write("Historical analysis of the team")
-selected_feature = st.selectbox("Select Feature", ["Possesso CUS Torino", 
-                                                   "Territorio CUS Torino", 
-                                                   "Falli Concessi",
-                                                   "Placcaggi Totali",
-                                                   "Portatori Totali",
-                                                   "Tempo Effettivo"], index=0)
-                                                   
-df['Falli Concessi'] = df['Falli Difensivi'] + df['Falli Offensivi']
-df['Placcaggi Totali'] = df['Placcaggi Avanzanti'] + df['Placcaggi Non Avanzanti'] + df['Placcaggi Mancati'] + df['Placcaggi Cover']
-df['Portatori Totali'] = df['Portatori Dominanti'] + df['Portatori Avanzanti'] + df['Portatori Non Avanzanti']
-basic_tooltip_features = ["Data", "Risultato", "Avversario"]
-if selected_feature == "Placcaggi Totali":
-    selected_feature_tooltip_features = [selected_feature, "Placcaggi Avanzanti", "Placcaggi Non Avanzanti", "Placcaggi Mancati", "Placcaggi Cover"]
-elif selected_feature == "Portatori Totali":
-    selected_feature_tooltip_features = [selected_feature, "Portatori Dominanti", "Portatori Avanzanti", "Portatori Non Avanzanti"]
-else:
-    selected_feature_tooltip_features = [selected_feature]
-tooltip_features = basic_tooltip_features + selected_feature_tooltip_features
-
-chart_hist_penalties = (alt.Chart(df)
-                        .mark_line()
-                        .encode(x='Data', y=selected_feature, 
-                                tooltip=tooltip_features,
-                                )
-                        .properties(width=800, height=400)
-                        )
-chart_hist_penalties = chart_hist_penalties + chart_hist_penalties.mark_circle().encode(size=alt.value(200), color='Risultato')
-st.altair_chart(chart_hist_penalties, use_container_width=True)
-
-st.header("Metrics")
-st.write("Displaying some metrics for the Team Stats dataset:")
-
-option_map = {
-    0: "Vittoria",
-    1: "Sconfitta",
-    2: "Pareggio",
-    3: "All",
-}
-selection = st.segmented_control(
-    "Filter by Results",
-    options=option_map.keys(),
-    format_func=lambda option: option_map[option],
-    selection_mode="multi",
-    default=[3],
-)
-
-selection = [option_map[selection_value] for selection_value in selection]
-tries_scored_avg_all = df["Mete CUS Torino"].mean()
-tries_conceded_avg_all = df["Mete Avversario"].mean()
-penalty_off_avg_all = df["Falli Offensivi"].mean()
-penalty_def_avg_all = df["Falli Difensivi"].mean()
-avg_dominant_tackles_per_game_all = df["Perc Placcaggi Avanzanti"].sum() / len(df)
-avg_not_dominant_tackles_per_game_all = df["Perc Placcaggi Non Avanzanti"].sum() / len(df)
-avg_missed_tackles_per_game_all = df["Perc Placcaggi Mancati"].sum() / len(df)
-
-if (len(selection) == 0) or ("All" in selection) or (['Vittoria', 'Sconfitta', 'Pareggio'] == selection):
-    selection = ['Vittoria', 'Sconfitta', 'Pareggio']    
-
-    columns = st.columns(4)
-    columns[0].metric(label="Avg Mete CUS Torino", value=f"{tries_scored_avg_all:.2f}")
-    columns[1].metric(label="Avg Mete Avversario", value=f"{tries_conceded_avg_all:.2f}")
-    columns[2].metric(label="Avg Falli Offensivi", value=f"{penalty_off_avg_all:.2f}")
-    columns[3].metric(label="Avg Falli Difensivi", value=f"{penalty_def_avg_all:.2f}")
-    columns = st.columns(3)
-    columns[0].metric(label="Avg Placcaggi Avanzanti per Game", value=f"{avg_dominant_tackles_per_game_all:.2f}")
-    columns[1].metric(label="Avg Placcaggi Non Avanzanti per Game", value=f"{avg_not_dominant_tackles_per_game_all:.2f}")
-    columns[2].metric(label="Avg Missed Tackles per Game", value=f"{avg_missed_tackles_per_game_all:.2f}")
-
-else:
-    df_filtered = df.copy()
-    if len(df_filtered) == 0:
-        st.write("No data available for the selected filter")
+    st.header("Historical Analysis")
+    st.write("Historical analysis of the team")
+    selected_feature = st.selectbox("Select Feature", ["Possesso CUS Torino", 
+                                                    "Territorio CUS Torino", 
+                                                    "Falli Concessi",
+                                                    "Placcaggi Totali",
+                                                    "Portatori Totali",
+                                                    "Tempo Effettivo"], index=0)
+                                                    
+    df['Falli Concessi'] = df['Falli Difensivi'] + df['Falli Offensivi']
+    df['Placcaggi Totali'] = df['Placcaggi Avanzanti'] + df['Placcaggi Non Avanzanti'] + df['Placcaggi Mancati'] + df['Placcaggi Cover']
+    df['Portatori Totali'] = df['Portatori Dominanti'] + df['Portatori Avanzanti'] + df['Portatori Non Avanzanti']
+    basic_tooltip_features = ["Data", "Risultato", "Avversario"]
+    if selected_feature == "Placcaggi Totali":
+        selected_feature_tooltip_features = [selected_feature, "Placcaggi Avanzanti", "Placcaggi Non Avanzanti", "Placcaggi Mancati", "Placcaggi Cover"]
+    elif selected_feature == "Portatori Totali":
+        selected_feature_tooltip_features = [selected_feature, "Portatori Dominanti", "Portatori Avanzanti", "Portatori Non Avanzanti"]
     else:
-        df_filtered = df_filtered[df_filtered['Risultato'].isin(selection)]
+        selected_feature_tooltip_features = [selected_feature]
+    tooltip_features = basic_tooltip_features + selected_feature_tooltip_features
 
-        tries_scored_avg = df_filtered["Mete CUS Torino"].mean()
-        tries_conceded_avg = df_filtered["Mete Avversario"].mean()
-        penalty_off_avg = df_filtered["Falli Offensivi"].mean()
-        penalty_def_avg = df_filtered["Falli Difensivi"].mean()
-        avg_dominant_tackles_per_game = df_filtered["Perc Placcaggi Avanzanti"].sum() / len(df_filtered)
-        avg_not_dominant_tackles_per_game = df_filtered["Perc Placcaggi Non Avanzanti"].sum() / len(df_filtered)
-        avg_missed_tackles_per_game = df_filtered["Perc Placcaggi Mancati"].sum() / len(df_filtered)
+    chart_hist_penalties = (alt.Chart(df)
+                            .mark_line()
+                            .encode(x='Data', y=selected_feature, 
+                                    tooltip=tooltip_features,
+                                    )
+                            .properties(width=800, height=400)
+                            )
+    chart_hist_penalties = chart_hist_penalties + chart_hist_penalties.mark_circle().encode(size=alt.value(200), color='Risultato')
+    st.altair_chart(chart_hist_penalties, use_container_width=True)
+
+    st.header("Metrics")
+    st.write("Displaying some metrics for the Team Stats dataset:")
+
+    option_map = {
+        0: "Vittoria",
+        1: "Sconfitta",
+        2: "Pareggio",
+        3: "All",
+    }
+    selection = st.segmented_control(
+        "Filter by Results",
+        options=option_map.keys(),
+        format_func=lambda option: option_map[option],
+        selection_mode="multi",
+        default=[3],
+    )
+
+    selection = [option_map[selection_value] for selection_value in selection]
+    tries_scored_avg_all = df["Mete CUS Torino"].mean()
+    tries_conceded_avg_all = df["Mete Avversario"].mean()
+    penalty_off_avg_all = df["Falli Offensivi"].mean()
+    penalty_def_avg_all = df["Falli Difensivi"].mean()
+    avg_dominant_tackles_per_game_all = df["Perc Placcaggi Avanzanti"].sum() / len(df)
+    avg_not_dominant_tackles_per_game_all = df["Perc Placcaggi Non Avanzanti"].sum() / len(df)
+    avg_missed_tackles_per_game_all = df["Perc Placcaggi Mancati"].sum() / len(df)
+
+    if (len(selection) == 0) or ("All" in selection) or (['Vittoria', 'Sconfitta', 'Pareggio'] == selection):
+        selection = ['Vittoria', 'Sconfitta', 'Pareggio']    
 
         columns = st.columns(4)
-        columns[0].metric(label="Avg Mete CUS Torino", value=f"{tries_scored_avg:.2f}", delta = f"{tries_scored_avg - tries_scored_avg_all:.2f}")
-        columns[1].metric(label="Avg Mete Avversario", value=f"{tries_conceded_avg:.2f}", delta=f"{tries_conceded_avg - tries_conceded_avg_all:.2f}", delta_color="inverse")
-        columns[2].metric(label="Avg Falli Offensivi", value=f"{penalty_off_avg:.2f}", delta = f"{penalty_off_avg - penalty_off_avg_all:.2f}", delta_color="inverse")
-        columns[3].metric(label="Avg Falli Difensivi", value=f"{penalty_def_avg:.2f}", delta = f"{penalty_def_avg - penalty_def_avg_all:.2f}", delta_color="inverse")
+        columns[0].metric(label="Avg Mete CUS Torino", value=f"{tries_scored_avg_all:.2f}")
+        columns[1].metric(label="Avg Mete Avversario", value=f"{tries_conceded_avg_all:.2f}")
+        columns[2].metric(label="Avg Falli Offensivi", value=f"{penalty_off_avg_all:.2f}")
+        columns[3].metric(label="Avg Falli Difensivi", value=f"{penalty_def_avg_all:.2f}")
         columns = st.columns(3)
-        columns[0].metric(label="Avg Placcaggi Avanzanti per Game", value=f"{avg_dominant_tackles_per_game:.2f}", delta = f"{avg_dominant_tackles_per_game - avg_dominant_tackles_per_game_all:.2f}")
-        columns[1].metric(label="Avg Placcaggi Non Avanzanti per Game", value=f"{avg_not_dominant_tackles_per_game:.2f}", delta = f"{avg_not_dominant_tackles_per_game - avg_not_dominant_tackles_per_game_all:.2f}")
-        columns[2].metric(label="Avg Placcaggi Mancati per Game", value=f"{avg_missed_tackles_per_game:.2f}", delta = f"{avg_missed_tackles_per_game - avg_missed_tackles_per_game_all:.2f}", delta_color="inverse")
+        columns[0].metric(label="Avg Placcaggi Avanzanti per Game", value=f"{avg_dominant_tackles_per_game_all:.2f}")
+        columns[1].metric(label="Avg Placcaggi Non Avanzanti per Game", value=f"{avg_not_dominant_tackles_per_game_all:.2f}")
+        columns[2].metric(label="Avg Missed Tackles per Game", value=f"{avg_missed_tackles_per_game_all:.2f}")
+
+    else:
+        df_filtered = df.copy()
+        if len(df_filtered) == 0:
+            st.write("No data available for the selected filter")
+        else:
+            df_filtered = df_filtered[df_filtered['Risultato'].isin(selection)]
+
+            tries_scored_avg = df_filtered["Mete CUS Torino"].mean()
+            tries_conceded_avg = df_filtered["Mete Avversario"].mean()
+            penalty_off_avg = df_filtered["Falli Offensivi"].mean()
+            penalty_def_avg = df_filtered["Falli Difensivi"].mean()
+            avg_dominant_tackles_per_game = df_filtered["Perc Placcaggi Avanzanti"].sum() / len(df_filtered)
+            avg_not_dominant_tackles_per_game = df_filtered["Perc Placcaggi Non Avanzanti"].sum() / len(df_filtered)
+            avg_missed_tackles_per_game = df_filtered["Perc Placcaggi Mancati"].sum() / len(df_filtered)
+
+            columns = st.columns(4)
+            columns[0].metric(label="Avg Mete CUS Torino", value=f"{tries_scored_avg:.2f}", delta = f"{tries_scored_avg - tries_scored_avg_all:.2f}")
+            columns[1].metric(label="Avg Mete Avversario", value=f"{tries_conceded_avg:.2f}", delta=f"{tries_conceded_avg - tries_conceded_avg_all:.2f}", delta_color="inverse")
+            columns[2].metric(label="Avg Falli Offensivi", value=f"{penalty_off_avg:.2f}", delta = f"{penalty_off_avg - penalty_off_avg_all:.2f}", delta_color="inverse")
+            columns[3].metric(label="Avg Falli Difensivi", value=f"{penalty_def_avg:.2f}", delta = f"{penalty_def_avg - penalty_def_avg_all:.2f}", delta_color="inverse")
+            columns = st.columns(3)
+            columns[0].metric(label="Avg Placcaggi Avanzanti per Game", value=f"{avg_dominant_tackles_per_game:.2f}", delta = f"{avg_dominant_tackles_per_game - avg_dominant_tackles_per_game_all:.2f}")
+            columns[1].metric(label="Avg Placcaggi Non Avanzanti per Game", value=f"{avg_not_dominant_tackles_per_game:.2f}", delta = f"{avg_not_dominant_tackles_per_game - avg_not_dominant_tackles_per_game_all:.2f}")
+            columns[2].metric(label="Avg Placcaggi Mancati per Game", value=f"{avg_missed_tackles_per_game:.2f}", delta = f"{avg_missed_tackles_per_game - avg_missed_tackles_per_game_all:.2f}", delta_color="inverse")
 
