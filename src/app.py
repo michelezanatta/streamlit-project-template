@@ -81,8 +81,8 @@ pages_dir = config_params.pages_dir
 # }
 
 pages = {'Home' : [st.Page(f"{pages_dir}/home.py", title="Home", icon="🏠",)],
-         "Demo": [st.Page(f"{pages_dir}/demo.py", title="Demo", icon="🚀")],}
-
+         "Demo Data Analysis": [st.Page(f"{pages_dir}/demo_da_rugby.py", title="Demo DA", icon="🚀")],
+}
 pg = st.navigation(pages)
 pg.run()
 

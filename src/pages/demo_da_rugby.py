@@ -16,6 +16,13 @@ sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from rsc.config import config_params
 
 data_dir = config_params.data_dir
+images_dir = config_params.images_dir
+
+st.logo(
+    f"{images_dir}/logo_cus.png",
+    link="https://mzds-demo.streamlit.app",
+    size = 'large'
+)
 
 @st.cache_data
 def load_data():
